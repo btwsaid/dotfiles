@@ -15,6 +15,15 @@ if wezterm.target_triple:find("windows") then
     config.font_dirs = { local_app_data .. "/Microsoft/Windows/Fonts" }
   end
   config.win32_system_backdrop = "Acrylic"
+  config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+  config.hide_tab_bar_if_only_one_tab = false
+
+  for _, domain in ipairs(wezterm.default_wsl_domains()) do
+    if domain.name == "WSL:Ubuntu" then
+      config.default_domain = domain.name
+      break
+    end
+  end
 elseif wezterm.target_triple:find("darwin") then
   config.macos_window_background_blur = 50
 end
